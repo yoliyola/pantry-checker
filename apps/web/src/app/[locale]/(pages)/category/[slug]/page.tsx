@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SUPPORTED_LOCALES, type Locale, formatDuration } from "@pantry/shared";
@@ -41,9 +42,7 @@ export default async function CategoryPage({ params }: Props) {
   return (
     <div>
       <nav className="breadcrumb">
-        <a href={`/${locale}`}>{messages.nav.home}</a>
-        <span>/</span>
-        <a href={`/${locale}/category`}>{messages.nav.categories}</a>
+        <Link href={`/${locale}`}>{messages.nav.home}</Link>
         <span>/</span>
         <span>{category.translation.name}</span>
       </nav>
@@ -54,7 +53,7 @@ export default async function CategoryPage({ params }: Props) {
 
       <div className="product-list" style={{ marginTop: "1.5rem" }}>
         {products.map((product) => (
-          <a
+          <Link
             key={product.id}
             href={`/${locale}/product/${product.slug}`}
             className="product-card"
@@ -66,7 +65,7 @@ export default async function CategoryPage({ params }: Props) {
                 {formatDuration(product.openedDurationDays, locale)}
               </span>
             )}
-          </a>
+          </Link>
         ))}
       </div>
     </div>

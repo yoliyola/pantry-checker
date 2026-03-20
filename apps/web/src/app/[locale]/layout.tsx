@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SUPPORTED_LOCALES, type Locale } from "@pantry/shared";
 import { getMessages } from "@pantry/i18n";
@@ -47,24 +48,24 @@ export default function LocaleLayout({
       <body>
         <header className="header">
           <nav className="nav">
-            <a href={`/${params.locale}`} className="logo">
+            <Link href={`/${params.locale}`} className="logo">
               🥫 CuantoDura
-            </a>
+            </Link>
             <div className="nav-links">
-              <a href={`/${params.locale}`}>{messages.nav.home}</a>
-              <a href={`/${params.locale}/category`}>
+              <Link href={`/${params.locale}`}>{messages.nav.home}</Link>
+              <Link href={`/${params.locale}/category/dairy`}>
                 {messages.nav.categories}
-              </a>
+              </Link>
             </div>
             <div className="locale-switcher">
               {SUPPORTED_LOCALES.map((loc) => (
-                <a
+                <Link
                   key={loc}
                   href={`/${loc}`}
                   className={loc === params.locale ? "active" : ""}
                 >
                   {loc.toUpperCase()}
-                </a>
+                </Link>
               ))}
             </div>
           </nav>

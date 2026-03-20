@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SUPPORTED_LOCALES, type Locale, formatDuration } from "@pantry/shared";
@@ -96,9 +97,9 @@ export default async function ProductPage({ params }: Props) {
   return (
     <div className="product-detail">
       <nav className="breadcrumb">
-        <a href={`/${locale}`}>
+        <Link href={`/${locale}`}>
           {messages.nav.home}
-        </a>
+        </Link>
         <span>/</span>
         <span>{product.translation.name}</span>
       </nav>

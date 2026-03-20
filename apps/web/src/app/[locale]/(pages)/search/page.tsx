@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import type { Locale, SearchResult } from "@pantry/shared";
 import { formatDuration } from "@pantry/shared";
 import { getMessages, t } from "@pantry/i18n";
@@ -51,9 +52,9 @@ export default function SearchPage({
             </p>
             <div className="product-list">
               {results.map(({ product, category }) => (
-                <a
+                <Link
                   key={product.id}
-                  href={`/${locale}/product/${product.slug}/`}
+                  href={`/${locale}/product/${product.slug}`}
                   className="product-card"
                 >
                   <h3>{product.translation.name}</h3>
@@ -76,7 +77,7 @@ export default function SearchPage({
                       {formatDuration(product.openedDurationDays, locale)}
                     </span>
                   )}
-                </a>
+                </Link>
               ))}
             </div>
           </>

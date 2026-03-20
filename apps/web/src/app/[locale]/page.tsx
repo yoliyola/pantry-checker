@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Locale } from "@pantry/shared";
 import { getMessages } from "@pantry/i18n";
 import { getAllCategories } from "@pantry/db";
@@ -45,12 +46,12 @@ export default async function HomePage({
           <h3>{messages.home.popularSearches}</h3>
           <div className="popular-tags">
             {popular.map((item) => (
-              <a
+              <Link
                 key={item.slug}
                 href={`/${locale}/product/${item.slug}`}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -60,14 +61,14 @@ export default async function HomePage({
         <h2>{messages.home.browseCategories}</h2>
         <div className="categories-grid">
           {categories.map((cat) => (
-            <a
+            <Link
               key={cat.id}
               href={`/${locale}/category/${cat.slug}`}
               className="category-card"
             >
               <div className="icon">{cat.icon ?? "📦"}</div>
               <div className="name">{cat.translation.name}</div>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
