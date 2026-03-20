@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://yoliyola.github.io/pantry-checker/sitemap.xml
