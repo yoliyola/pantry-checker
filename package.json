@@ -1,0 +1,15 @@
+{
+  "name": "pantry-checker",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "db:migrate": "supabase db push",
+    "db:seed": "node supabase/seed.mjs"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}
