@@ -1,19 +1,30 @@
-import type { Locale } from "@pantry/shared";
+"use client";
+
+import { useState, useEffect } from "react";
+import type { Locale, SearchResult } from "@pantry/shared";
 import { formatDuration } from "@pantry/shared";
 import { getMessages, t } from "@pantry/i18n";
 import { searchProducts } from "@pantry/db";
 import { SearchBar } from "@/components/SearchBar";
 
-interface Props {
+export default function SearchPage({
+  params,
+}: {
   params: { locale: string };
-  searchParams: { q?: string };
-}
-
-export default async function SearchPage({ params, searchParams }: Props) {
+}) {
   const locale = params.locale as Locale;
   const messages = getMessages(locale);
-  const query = searchParams.q ?? "";
-  const results = query ? await searchProducts(query, locale) : [];
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<SearchResult[]>([]);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const q = urlParams.get("q") ?? "";
+    setQuery(q);
+    if (q) {
+      searchProducts(q, locale).then(setResults);
+    }
+  }, [locale]);
 
   return (
     <div>
@@ -42,7 +53,7 @@ export default async function SearchPage({ params, searchParams }: Props) {
               {results.map(({ product, category }) => (
                 <a
                   key={product.id}
-                  href={`/${locale}/product/${product.slug}`}
+                  href={`/${locale}/product/${product.slug}/`}
                   className="product-card"
                 >
                   <h3>{product.translation.name}</h3>

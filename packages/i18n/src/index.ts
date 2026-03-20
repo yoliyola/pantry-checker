@@ -4,7 +4,7 @@ import type { Locale } from "@pantry/shared";
 
 export type Messages = typeof es;
 
-const messages: Record<string, Messages> = { es, en };
+const messages: Record<string, Messages> = { es, en: en as unknown as Messages };
 
 export function getMessages(locale: Locale): Messages {
   return messages[locale] ?? messages.es;
